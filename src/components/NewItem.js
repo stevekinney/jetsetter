@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import uniqueId from 'lodash/uniqueId';
 import './NewItem.css';
 
 class NewItem extends Component {
@@ -17,7 +18,7 @@ class NewItem extends Component {
     return this.state.value !== newState.value;
   }
 
-  handleChange(event: Event) {
+  handleChange(event) {
     const { target } = event;
     if (target instanceof HTMLInputElement) {
       const { value } = target;
@@ -25,12 +26,12 @@ class NewItem extends Component {
     }
   }
 
-  handleSubmit(event: Event) {
+  handleSubmit(event) {
     const { onSubmit } = this.props;
     const { value } = this.state;
 
     event.preventDefault();
-    onSubmit({ value, packed: false, id: Date.now() });
+    onSubmit({ value, packed: false, id: uniqueId() });
     this.setState({ value: '' });
   }
 
@@ -39,7 +40,12 @@ class NewItem extends Component {
 
     return (
       <form className="NewItem" onSubmit={this.handleSubmit}>
-        <input className="NewItem-input" type="text" value={value} onChange={this.handleChange} />
+        <input
+          className="NewItem-input"
+          type="text"
+          value={value}
+          onChange={this.handleChange}
+        />
         <input className="NewItem-submit button" type="submit" />
       </form>
     );
@@ -51,7 +57,7 @@ NewItem.propTypes = {
 };
 
 NewItem.defaultProps = {
-  onSubmit: () => { },
+  onSubmit: () => {},
 };
 
 export default NewItem;

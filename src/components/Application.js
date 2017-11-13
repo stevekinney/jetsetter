@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
+import uniqueId from 'lodash/uniqueId';
 import CountDown from './CountDown';
 import NewItem from './NewItem';
 import Items from './Items';
 
 import './Application.css';
 
-let count = 0;
-
 const defaultState = [
-  { value: 'Pants', id: count++, packed: false },
-  { value: 'Jacket', id: count++, packed: false },
-  { value: 'iPhone Charger', id: count++, packed: false },
-  { value: 'MacBook', id: count++, packed: false },
-  { value: 'Sleeping Pills', id: count++, packed: true },
-  { value: 'Underwear', id: count++, packed: false },
-  { value: 'Hat', id: count++, packed: false },
-  { value: 'T-Shirts', id: count++, packed: false },
-  { value: 'Belt', id: count++, packed: false },
-  { value: 'Passport', id: count++, packed: true },
-  { value: 'Sandwich', id: count++, packed: true },
+  { value: 'Pants', id: uniqueId(), packed: false },
+  { value: 'Jacket', id: uniqueId(), packed: false },
+  { value: 'iPhone Charger', id: uniqueId(), packed: false },
+  { value: 'MacBook', id: uniqueId(), packed: false },
+  { value: 'Sleeping Pills', id: uniqueId(), packed: true },
+  { value: 'Underwear', id: uniqueId(), packed: false },
+  { value: 'Hat', id: uniqueId(), packed: false },
+  { value: 'T-Shirts', id: uniqueId(), packed: false },
+  { value: 'Belt', id: uniqueId(), packed: false },
+  { value: 'Passport', id: uniqueId(), packed: true },
+  { value: 'Sandwich', id: uniqueId(), packed: true },
 ];
 
 const defaultTripTime = Date.now() + 1000 * 60 * 10;

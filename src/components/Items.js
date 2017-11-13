@@ -25,16 +25,24 @@ class Items extends Component {
     const { searchTerm } = this.state;
     return (
       <section className="Items">
-        <h2>{ title } ({items.length})</h2>
-        <input className="Items-searchTerm" value={searchTerm} onChange={this.updateSearchTerm} />
-        {items.filter(item => item.value.toLowerCase().includes(searchTerm)).map(item => (
-          <Item
-            key={item.id}
-            onCheckOff={() => onCheckOff(item)}
-            onRemove={() => onRemove(item)}
-            {...item}
-          />
-        ))}
+        <h2>
+          {title} ({items.length})
+        </h2>
+        <input
+          className="Items-searchTerm"
+          value={searchTerm}
+          onChange={this.updateSearchTerm}
+        />
+        {items
+          .filter(item => item.value.toLowerCase().includes(searchTerm))
+          .map(item => (
+            <Item
+              key={item.id}
+              onCheckOff={() => onCheckOff(item)}
+              onRemove={() => onRemove(item)}
+              {...item}
+            />
+          ))}
       </section>
     );
   }
@@ -46,7 +54,7 @@ Items.propTypes = {
     PropTypes.shape({
       value: PropTypes.string,
       packed: PropTypes.bool,
-      id: PropTypes.number,
+      id: PropTypes.string,
     }),
   ).isRequired,
   onCheckOff: PropTypes.func,

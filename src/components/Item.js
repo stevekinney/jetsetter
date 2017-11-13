@@ -8,10 +8,17 @@ class Item extends Component {
     return (
       <article className="Item">
         <label htmlFor={id}>
-          <input type="checkbox" checked={packed} onChange={onCheckOff} id={id} />
+          <input
+            type="checkbox"
+            checked={packed}
+            onChange={onCheckOff}
+            id={id}
+          />
           {value}
         </label>
-        <button className="Item-remove" onClick={onRemove}>Remove</button>
+        <button className="Item-remove" onClick={onRemove}>
+          Remove
+        </button>
       </article>
     );
   }
@@ -19,7 +26,7 @@ class Item extends Component {
 
 Item.propTypes = {
   packed: PropTypes.bool,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onCheckOff: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
