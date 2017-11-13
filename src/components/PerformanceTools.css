@@ -1,0 +1,15 @@
+.PerformanceTools button {
+  background-color: white;
+  border: 1px solid #e10d3d;
+  color: #f32e5b;
+  width: 100%;
+}
+
+.PerformanceTools button:hover {
+  background-color: #EFEFEF;
+  color: #f65e81;;
+}
+.PerformanceTools button:active {
+  background-color: #f4466e;
+  color: white;
+}
