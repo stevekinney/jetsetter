@@ -22,10 +22,10 @@ export default {
     });
   },
 
-  delete(item) {
+  delete(id) {
     return database.then(db => {
       const tx = db.transaction('items', 'readwrite');
-      tx.objectStore('items').delete(item.id);
+      tx.objectStore('items').delete(id);
       return tx.complete;
     });
   },

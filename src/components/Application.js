@@ -5,6 +5,7 @@ import UnpackedItemsContainer from '../containers/UnpackedItemsContainer';
 import MarkAllAsUnpackedContainer from '../containers/MarkAllAsUnpackedContainer';
 import UnpackedFilterContainer from '../containers/UnpackedFilterContainer';
 import PackedFilterContainer from '../containers/PackedFilterContainer';
+import CountDownContainer from '../containers/CountdownContainer';
 
 import './Application.css';
 
@@ -13,6 +14,7 @@ class Application extends Component {
     return (
       <div className="Application">
         <NewItemContainer />
+        <CountDownContainer />
         <UnpackedItemsContainer title="Unpacked Items" render={() => <UnpackedFilterContainer />} />
         <PackedItemsContainer title="Packed Items" render={() => <PackedFilterContainer />} />
         <MarkAllAsUnpackedContainer />
