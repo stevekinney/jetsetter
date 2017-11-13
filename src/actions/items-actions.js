@@ -1,5 +1,5 @@
 import uniqueId from 'lodash/uniqueId';
-import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM } from '../constants';
+import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED } from '../constants';
 
 export const addNewItem = (value) => ({
   type: ADD_NEW_ITEM,
@@ -17,3 +17,7 @@ export const removeItem = (id) => ({
   type: REMOVE_ITEM,
   id,
 });
+
+export const markAllAsUnpacked = () => ({
+  type: MARK_ALL_AS_UNPACKED,
+})

@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Item from './Item';
 import './Items.css';
 
 class Items extends Component {
   render() {
-    console.log({items});
-    const { title, items, onCheckOff, onRemove, searchTerm, updateSearchTerm } = this.props;
+    const { title, items, onCheckOff, onRemove } = this.props;
     return (
       <section className="Items">
         <h2>
           {title} ({items.length})
         </h2>
-        {/* <input
-          className="Items-searchTerm"
-          value={searchTerm}
-          onChange={updateSearchTerm}
-        /> */}
+        { this.props.render && this.props.render() }
         {items.map(item => (
             <Item
               key={item.id}

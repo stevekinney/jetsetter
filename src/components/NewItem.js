@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import uniqueId from 'lodash/uniqueId';
 import './NewItem.css';
 
 class NewItem extends Component {
+  handleChange = (event) => {
+    const value = event.target.value;
+    this.props.updateNewItemValue(value);
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { value } = this.props;
+    this.props.addNewItem(value);
+  }
+
   render() {
-    const { value, handleChange, handleSubmit } = this.props;
+    const { value } = this.props;
 
     return (
-      <form className="NewItem" onSubmit={(event) => {
-        event.preventDefault();
-        handleSubmit(value);
-      }}>
+      <form className="NewItem" onSubmit={this.handleSubmit}>
         <input
           className="NewItem-input"
           type="text"
           value={value}
-          onChange={handleChange}
+          onChange={this.handleChange}
         />
         <input className="NewItem-submit button" type="submit" />
       </form>

@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import NewItem from '../components/NewItem';
 
@@ -6,14 +7,11 @@ import { addNewItem } from '../actions/items-actions';
 
 const mapStateToProps = ({ newItemValue }) => ({ value: newItemValue });
 
-const mapDispatchToProps = dispatch => ({
-  handleChange(event) {
-    const value = event.target.value;
-    dispatch(updateNewItemValue(value));
-  },
-  handleSubmit(value) {
-    dispatch(addNewItem(value));
-  },
-});
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateNewItemValue,
+    addNewItem
+  }, dispatch)
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewItem);

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import values from 'lodash/values';
 import Items from '../components/Items';
 
 import {
@@ -7,9 +6,8 @@ import {
   removeItem,
 } from '../actions/items-actions'
 
-const mapStateToProps = ({ items }) => {
-  console.log({items, arr: values(items).filter(item => !item.packed)});
-  return { items: values(items).filter(item => !item.packed) };
+const mapStateToProps = ({ items, filter }) => {
+  return { items: items.filter(item => !item.packed && item.value.includes(filter.unpackedItemsFilter)) };
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,7 +8,7 @@ export const updateUnpackedItemsFilter = (text) => ({
   text,
 });
 
-export const updatedPackedItemsFilter = (text) => ({
+export const updatePackedItemsFilter = (text) => ({
   type: UPDATE_PACKED_ITEMS_FILTER,
   text,
 });

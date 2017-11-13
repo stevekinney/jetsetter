@@ -12,7 +12,7 @@ const items = [
   { value: 'Belt', id: uniqueId(), packed: false },
   { value: 'Passport', id: uniqueId(), packed: true },
   { value: 'Sandwich', id: uniqueId(), packed: true },
-].reduce((result, item) => ({ ...result, [item.id]: item }), {});
+];
 
 export default {
   items,
