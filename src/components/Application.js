@@ -30,18 +30,10 @@ const calculateTimeLeft = () => {
 };
 
 class Application extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: defaultState,
-      timeLeft: calculateTimeLeft(),
-    };
-
-    this.addItem = this.addItem.bind(this);
-    this.removeItem = this.removeItem.bind(this);
-    this.markAsPacked = this.markAsPacked.bind(this);
-    this.markAllAsUnpacked = this.markAllAsUnpacked.bind(this);
-  }
+  state = {
+    items: defaultState,
+    timeLeft: calculateTimeLeft(),
+  };
 
   componentDidMount() {
     this.countDownInterval = setInterval(() => {
@@ -53,26 +45,26 @@ class Application extends Component {
     clearInterval(this.countDownInterval);
   }
 
-  addItem(item) {
+  addItem = item => {
     this.setState({ items: [item, ...this.state.items] });
-  }
+  };
 
-  removeItem(item) {
+  removeItem = item => {
     this.setState({
       items: this.state.items.filter(other => other.id !== item.id),
     });
-  }
+  };
 
-  markAsPacked(item) {
+  markAsPacked = item => {
     const otherItems = this.state.items.filter(other => other.id !== item.id);
     const updatedItem = { ...item, packed: !item.packed };
     this.setState({ items: [updatedItem, ...otherItems] });
-  }
+  };
 
-  markAllAsUnpacked() {
+  markAllAsUnpacked = () => {
     const items = this.state.items.map(item => ({ ...item, packed: false }));
     this.setState({ items });
-  }
+  };
 
   render() {
     const { items } = this.state;
