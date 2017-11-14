@@ -1,5 +1,9 @@
 import {
   UPDATE_ALL_ITEMS,
+  ADD_NEW_ITEM,
+  REMOVE_ITEM,
+  TOGGLE_ITEM,
+  MARK_ALL_AS_UNPACKED,
 } from '../constants';
 
 import Api from '../lib/api';
@@ -22,25 +26,34 @@ export const addNewItem = value => {
   };
 
   return dispatch => {
-    Api.add(item).then((...args) => {
-      dispatch(getAllItems());
+    Api.add(item).then(item => {
+      dispatch({
+        type: ADD_NEW_ITEM,
+        item
+      });
     });
-  }
+  };
 };
 
-export const toggleItem = id => {
+export const toggleItem = item => {
+  const updatedItem = { ...item, packed: !item.packed };
   return (dispatch, getState) => {
-    const item = getState().items.find(item => id === item.id);
-    Api.update({ ...item, packed: !item.packed }).then(() => {
-      dispatch(getAllItems())
+    Api.update(updatedItem).then(() => {
+      dispatch({
+        type: TOGGLE_ITEM,
+        item: updatedItem,
+      });
     });
-  }
+  };
 };
 
-export const removeItem = id => {
+export const removeItem = item => {
   return dispatch => {
-    Api.delete(id).then(() => {
-      dispatch(getAllItems());
+    Api.delete(item).then(() => {
+      dispatch({
+        type: REMOVE_ITEM,
+        id: item.id,
+      });
     });
   };
 };
@@ -48,7 +61,9 @@ export const removeItem = id => {
 export const markAllAsUnpacked = () => {
   return dispatch => {
     Api.markAllAsUnpacked().then(() => {
-      dispatch(getAllItems());
+      dispatch({
+        type: MARK_ALL_AS_UNPACKED,
+      });
     });
   };
-}
+};

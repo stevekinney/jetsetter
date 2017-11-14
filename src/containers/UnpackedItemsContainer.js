@@ -10,13 +10,13 @@ const mapStateToProps = ({ items, filter }) => {
   return { items: items.filter(item => !item.packed && item.value.includes(filter.unpackedItemsFilter)) };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onCheckOff(id) {
-    dispatch(toggleItem(id))
+const mapDispatchToProps = dispatch => ({
+  onCheckOff(item) {
+    dispatch(toggleItem(item));
   },
-  onRemove(id) {
-    dispatch(removeItem(id))
-  }
+  onRemove(item) {
+    dispatch(removeItem(item));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items);

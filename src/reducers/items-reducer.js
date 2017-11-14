@@ -6,7 +6,7 @@ export default function(state = {}, action) {
   }
 
   if (action.type === ADD_NEW_ITEM) {
-    const { id, packed, value } = action;
+    const { id, packed, value } = action.item;
     return [ ...state, { id, packed, value } ];
   }
 
@@ -16,7 +16,7 @@ export default function(state = {}, action) {
 
   if (action.type === TOGGLE_ITEM) {
     return state.map(item => {
-      if (item.id === action.id) return { ...item, packed: !item.packed  };
+      if (item.id === action.item.id) return { ...action.item };
       return item;
     });
   }

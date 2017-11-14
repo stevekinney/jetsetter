@@ -14,8 +14,8 @@ class Items extends Component {
         {items.map(item => (
             <Item
               key={item.id}
-              onCheckOff={() => onCheckOff(item.id)}
-              onRemove={() => onRemove(item.id)}
+              onCheckOff={() => onCheckOff(item)}
+              onRemove={() => onRemove(item)}
               {...item}
             />
           ))}
