@@ -1,39 +1,30 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import uniqueId from 'lodash/uniqueId';
+
 import './NewItem.css';
 
 class NewItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    value: '',
+  };
 
   shouldComponentUpdate(newProps, newState) {
     return this.state.value !== newState.value;
   }
 
-  handleChange(event) {
-    const { target } = event;
-    if (target instanceof HTMLInputElement) {
-      const { value } = target;
-      this.setState({ value });
-    }
-  }
+  handleChange = event => {
+    const value = event.target.value;
+    this.setState({ value });
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     const { onSubmit } = this.props;
     const { value } = this.state;
 
     event.preventDefault();
     onSubmit({ value, packed: false, id: uniqueId() });
     this.setState({ value: '' });
-  }
+  };
 
   render() {
     const { value } = this.state;
@@ -51,13 +42,5 @@ class NewItem extends Component {
     );
   }
 }
-
-NewItem.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-NewItem.defaultProps = {
-  onSubmit: () => {},
-};
 
 export default NewItem;
