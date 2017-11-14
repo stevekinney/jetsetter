@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import uniqueId from 'lodash/uniqueId';
 import './NewItem.css';
+
+import AppDispatcher from '../dispatcher';
 
 class NewItem extends Component {
   constructor() {
@@ -27,11 +28,15 @@ class NewItem extends Component {
   }
 
   handleSubmit(event) {
-    const { onSubmit } = this.props;
     const { value } = this.state;
 
     event.preventDefault();
-    onSubmit({ value, packed: false, id: uniqueId() });
+
+    AppDispatcher.dispatch({
+      type: 'ADD_NEW_ITEM',
+      item: { value, packed: false, id: uniqueId() },
+    });
+
     this.setState({ value: '' });
   }
 
@@ -51,13 +56,5 @@ class NewItem extends Component {
     );
   }
 }
-
-NewItem.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-NewItem.defaultProps = {
-  onSubmit: () => {},
-};
 
 export default NewItem;

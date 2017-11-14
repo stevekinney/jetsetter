@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './Item.css';
 
+import AppDispatcher from '../dispatcher';
+
 class Item extends Component {
+  toggleItem = () => {
+    const { item } = this.props;
+    AppDispatcher.dispatch({
+      type: 'UPDATE_ITEM',
+      item: { ...item, packed: !item.packed },
+    });
+  };
+
+  removeItem = () => {
+    const { item } = this.props;
+    AppDispatcher.dispatch({
+      type: 'REMOVE_ITEM',
+      item,
+    });
+  };
+
   render() {
-    const { packed, id, value, onCheckOff, onRemove } = this.props;
+    const { item } = this.props;
     return (
       <article className="Item">
-        <label htmlFor={id}>
+        <label>
           <input
             type="checkbox"
-            checked={packed}
-            onChange={onCheckOff}
-            id={id}
+            checked={item.packed}
+            onChange={this.toggleItem}
           />
-          {value}
+          {item.value}
         </label>
-        <button className="Item-remove" onClick={onRemove}>
+        <button className="Item-remove" onClick={this.removeItem}>
           Remove
         </button>
       </article>
     );
   }
 }
-
-Item.propTypes = {
-  packed: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onCheckOff: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-};
-
-Item.defaultProps = {
-  packed: false,
-};
 
 export default Item;
