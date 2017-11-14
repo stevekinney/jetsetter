@@ -1,10 +1,19 @@
 import { observable, computed, action } from 'mobx';
 import Item from './ItemModel';
 
+import Api from '../lib/api';
+
 export default class ItemStore {
   @observable items = [];
   @observable unpackedItemsFilter = '';
   @observable packedItemsFilter = '';
+
+  constructor() {
+    Api.getAll().then(items => {
+      console.log(items);
+      this.items = items.map(item => new Item(item, this));
+    });
+  }
 
   @computed get packedItems() {
     return this.items.filter(item => item.packed);
@@ -30,7 +39,8 @@ export default class ItemStore {
     return this.unpackedItems.length;
   }
 
-  @action.bound addItem(item) {
+  @action.bound async addItem(newItem) {
+    const item = await Api.add(newItem);
     this.items.push(new Item(item, this));
   }
 
@@ -47,6 +57,6 @@ export default class ItemStore {
   }
 
   @action.bound markAllAsUnpacked() {
-    this.items.forEach(item => item.packed = false);
+    this.items.forEach(item => item.toggle(false));
   }
 }
