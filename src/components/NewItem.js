@@ -26,7 +26,8 @@ class NewItem extends Component {
     const { itemStore } = this.props;
     itemStore.addItem({
       value: this.state.value,
-    })
+    });
+    this.setState({ value: '' });
   }
 
   render() {
