@@ -4,17 +4,10 @@ import uniqueId from 'lodash/uniqueId';
 import './NewItem.css';
 
 class NewItem extends Component {
-  state = {
-    value: '',
-  };
-
-  shouldComponentUpdate(newProps, newState) {
-    return this.state.value !== newState.value;
-  }
+  state = { value: '' };
 
   handleChange = event => {
-    const value = event.target.value;
-    this.setState({ value });
+    // Do something when the state of this input changes.
   };
 
   handleSubmit = event => {
@@ -22,8 +15,10 @@ class NewItem extends Component {
     const { value } = this.state;
 
     event.preventDefault();
-    onSubmit({ value, packed: false, id: uniqueId() });
-    this.setState({ value: '' });
+
+    // Do something when a new value is submitted.
+
+    // Reset the state of the component.
   };
 
   render() {

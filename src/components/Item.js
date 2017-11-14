@@ -3,19 +3,19 @@ import './Item.css';
 
 class Item extends Component {
   render() {
-    const { item, onCheckOff, onRemove } = this.props;
+    const { item } = this.props;
     return (
       <article className="Item">
         <label htmlFor={item.id}>
           <input
             type="checkbox"
             checked={item.packed}
-            onChange={onCheckOff}
+            onChange={() => {}}
             id={item.id}
           />
           {item.value}
         </label>
-        <button className="Item-remove" onClick={onRemove}>
+        <button className="Item-remove" onClick={() => {}}>
           Remove
         </button>
       </article>
