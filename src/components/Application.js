@@ -14,6 +14,11 @@ const UnpackedItems = inject('itemStore')(
       items={itemStore.filteredUnpackedItems}
       total={itemStore.unpackedItemsLength}
     >
+      <Filter
+        value={itemStore.unpackedItemsFilter}
+        onChange={itemStore.updateUnpackedItemsFilter}
+      />
+    </Items>
   )),
 );
 
@@ -21,8 +26,23 @@ const PackedItems = inject('itemStore')(
   observer(({ itemStore }) => (
     <Items
       title="Packed Items"
+      items={itemStore.filteredPackedItems}
+      total={itemStore.packedItemsLength}
+    >
+      <Filter
+        value={itemStore.packedItemsFilter}
+        onChange={itemStore.updatePackedItemsFilter}
+      />
+    </Items>
   )),
 );
+
+// Exercise
+const MarkAllAsUnpacked = inject('itemStore')(({ itemStore }) => (
+  <button className="full-width" onClick={itemStore.markAllAsUnpacked}>
+    Mark All as Unpacked
+  </button>
+));
 
 class Application extends Component {
   render() {
@@ -31,6 +51,7 @@ class Application extends Component {
         <NewItem />
         <UnpackedItems />
         <PackedItems />
+        <MarkAllAsUnpacked />
       </div>
     );
   }
