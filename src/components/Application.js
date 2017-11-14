@@ -20,29 +20,10 @@ const defaultState = [
   { value: 'Sandwich', id: uniqueId(), packed: true },
 ];
 
-const defaultTripTime = Date.now() + 1000 * 60 * 10;
-const calculateTimeLeft = () => {
-  const distance = defaultTripTime - Date.now();
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  return `in ${minutes} minute(s) and ${seconds} second(s)`;
-};
-
 class Application extends Component {
   state = {
     items: defaultState,
-    timeLeft: calculateTimeLeft(),
   };
-
-  componentDidMount() {
-    this.countDownInterval = setInterval(() => {
-      this.setState({ timeLeft: calculateTimeLeft() });
-    }, 500);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.countDownInterval);
-  }
 
   addItem = item => {
     this.setState({ items: [item, ...this.state.items] });

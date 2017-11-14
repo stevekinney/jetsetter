@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Item from './Item';
-import './Items.css';
+import Filter from './Filter';
 
 class Items extends Component {
-  constructor() {
-    super();
-    this.state = {
-      searchTerm: '',
-    };
+  state = {
+    searchTerm: '',
+  };
 
-    this.updateSearchTerm = this.updateSearchTerm.bind(this);
-  }
-
-  updateSearchTerm(event) {
-    const searchTerm = event.target.value.toLowerCase();
-    this.setState({
-      searchTerm,
-    });
-  }
+  updateSearchTerm = searchTerm => {
+    this.setState({ searchTerm });
+  };
 
   render() {
     const { title, items, onCheckOff, onRemove } = this.props;
@@ -28,42 +19,22 @@ class Items extends Component {
         <h2>
           {title} ({items.length})
         </h2>
-        <input
-          className="Items-searchTerm"
-          value={searchTerm}
-          onChange={this.updateSearchTerm}
-        />
+        <Filter searchTerm={searchTerm} onChange={this.updateSearchTerm} />
         {items
-          .filter(item => item.value.toLowerCase().includes(searchTerm))
+          .filter(item =>
+            item.value.toLowerCase().includes(searchTerm.toLowerCase()),
+          )
           .map(item => (
             <Item
               key={item.id}
               onCheckOff={() => onCheckOff(item)}
               onRemove={() => onRemove(item)}
-              {...item}
+              item={item}
             />
           ))}
       </section>
     );
   }
 }
-
-Items.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string,
-      packed: PropTypes.bool,
-      id: PropTypes.string,
-    }),
-  ).isRequired,
-  onCheckOff: PropTypes.func,
-  onRemove: PropTypes.func,
-};
-
-Items.defaultProps = {
-  onCheckOff: () => {},
-  onRemove: () => {},
-};
 
 export default Items;

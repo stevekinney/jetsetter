@@ -1,18 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
+import calculateTimeLeft from '../lib/calculate-time-left';
 
 import './CountDown.css';
 
-const CountDown = ({ timeLeft }) => (
-  <div className="CountDown">The Lyft will be here in about {timeLeft}.</div>
-);
+export default class CountDown extends Component {
+  state = {
+    timeLeft: calculateTimeLeft(),
+  };
 
-CountDown.propTypes = {
-  timeLeft: PropTypes.string,
-};
+  componentDidMount() {
+    this.countDownInterval = setInterval(() => {
+      this.setState({ timeLeft: calculateTimeLeft() });
+    }, 500);
+  }
 
-CountDown.defaultProps = {
-  timeLeft: 'eventually',
-};
+  componentWillUnmount() {
+    clearInterval(this.countDownInterval);
+  }
 
-export default CountDown;
+  render() {
+    const { timeLeft } = this.state;
+    return (
+      <div className="CountDown">
+        The Lyft will be here in about {timeLeft}.
+      </div>
+    );
+  }
+}
