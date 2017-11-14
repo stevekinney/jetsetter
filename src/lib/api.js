@@ -1,68 +1,51 @@
-import idb from 'idb';
+import localforage from 'localforage';
 
-const database = idb.open('items-database', 3, upgradeDb => {
-  upgradeDb.createObjectStore('items', { keyPath: 'id', autoIncrement: true });
-});
+window.localforage = localforage;
+
+const getAll = async () => {
+  const items = await localforage.getItem('items');
+  if (!items) await localforage.setItem('items', []);
+  return items || [];
+};
 
 export default {
-  add(item) {
-    return database.then(db => {
-      const tx = db.transaction('items', 'readwrite');
-      tx.objectStore('items').add(item);
-      return tx.complete;
-    });
+  async add(item) {
+    const items = await getAll();
+    const newItem = { ...item, id: Date.now() };
+    localforage.setItem('items', [...items, newItem]);
+    return newItem;
   },
 
-  getAll() {
-    return database.then(db => {
-      return db
-        .transaction('items')
-        .objectStore('items')
-        .getAll();
-    });
+  async getAll() {
+    return await getAll();
   },
 
-  delete(item) {
-    return database.then(db => {
-      const tx = db.transaction('items', 'readwrite');
-      tx.objectStore('items').delete(item.id);
-      return tx.complete;
-    });
+  async delete({ id }) {
+    const items = await getAll();
+    localforage.setItem('items', items.filter(item => item.id !== id));
   },
 
-  update(item) {
-    return database.then(db => {
-      const tx = db.transaction('items', 'readwrite');
-      tx.objectStore('items').put(item);
-      return tx.complete;
-    });
+  async update(updatedItem) {
+    const items = await getAll();
+    localforage.setItem(
+      'items',
+      items.map(item => {
+        if (item.id === updatedItem.id) return { ...item, ...updatedItem };
+        return item;
+      }),
+    );
   },
 
-  markAllAsUnpacked() {
-    return this.getAll()
-      .then(items => items.map(item => ({ ...item, packed: false })))
-      .then(items => {
-        return database.then(db => {
-          const tx = db.transaction('items', 'readwrite');
-          for (const item of items) {
-            tx.objectStore('items').put(item);
-          }
-          return tx.complete;
-        });
-      });
+  async markAllAsUnpacked() {
+    const items = await getAll();
+    localforage.setItem(
+      'items',
+      items.map(item => ({ ...item, packed: false })),
+    );
   },
 
-  deleteUnpackedItems() {
-    return this.getAll()
-      .then(items => items.filter(item => !item.packed))
-      .then(items => {
-        return database.then(db => {
-          const tx = db.transaction('items', 'readwrite');
-          for (const item of items) {
-            tx.objectStore('items').delete(item.id);
-          }
-          return tx.complete;
-        });
-      });
+  async deleteUnpackedItems() {
+    const items = await getAll();
+    localforage.setItem('items', items.filter(({ packed }) => packed));
   },
 };
