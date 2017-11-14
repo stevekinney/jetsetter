@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import uniqueId from 'lodash/uniqueId';
+import { inject } from 'mobx-react';
+
 import './NewItem.css';
 
+@inject('itemStore')
 class NewItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    value: '',
+  };
 
   shouldComponentUpdate(newProps, newState) {
     return this.state.value !== newState.value;
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const { target } = event;
     if (target instanceof HTMLInputElement) {
       const { value } = target;
@@ -26,13 +21,12 @@ class NewItem extends Component {
     }
   }
 
-  handleSubmit(event) {
-    const { onSubmit } = this.props;
-    const { value } = this.state;
-
+  handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ value, packed: false, id: uniqueId() });
-    this.setState({ value: '' });
+    const { itemStore } = this.props;
+    itemStore.addItem({
+      value: this.state.value,
+    })
   }
 
   render() {
@@ -51,13 +45,5 @@ class NewItem extends Component {
     );
   }
 }
-
-NewItem.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-NewItem.defaultProps = {
-  onSubmit: () => {},
-};
 
 export default NewItem;
