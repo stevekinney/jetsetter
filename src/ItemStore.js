@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import uniqueId from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 
 import AppDispatcher from './dispatcher';
 

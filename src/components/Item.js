@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import './Item.css';
 
-import AppDispatcher from '../dispatcher';
+import { removeItem, toggleItem } from '../actions';
 
 class Item extends Component {
   toggleItem = () => {
     const { item } = this.props;
-    AppDispatcher.dispatch({
-      type: 'UPDATE_ITEM',
-      item: { ...item, packed: !item.packed },
-    });
+    toggleItem(item);
   };
 
   removeItem = () => {
     const { item } = this.props;
-    AppDispatcher.dispatch({
-      type: 'REMOVE_ITEM',
-      item,
-    });
+    removeItem(item);
   };
 
   render() {

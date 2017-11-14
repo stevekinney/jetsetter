@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import uniqueId from 'lodash/uniqueId';
 import './NewItem.css';
 
-import AppDispatcher from '../dispatcher';
+import { addItem } from '../actions';
 
 class NewItem extends Component {
   constructor() {
@@ -15,27 +14,16 @@ class NewItem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  shouldComponentUpdate(newProps, newState) {
-    return this.state.value !== newState.value;
-  }
-
   handleChange(event) {
-    const { target } = event;
-    if (target instanceof HTMLInputElement) {
-      const { value } = target;
-      this.setState({ value });
-    }
+    const value = event.target.value;
+    this.setState({ value });
   }
 
   handleSubmit(event) {
     const { value } = this.state;
-
     event.preventDefault();
 
-    AppDispatcher.dispatch({
-      type: 'ADD_NEW_ITEM',
-      item: { value, packed: false, id: uniqueId() },
-    });
+    addItem(value);
 
     this.setState({ value: '' });
   }
