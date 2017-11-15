@@ -7,20 +7,21 @@ import ItemStore from '../ItemStore';
 import './Application.css';
 
 class Application extends Component {
-  listener;
   state = {
     items: ItemStore.getItems(),
   };
 
+  updateItems = () => {
+    const items = ItemStore.getItems();
+    this.setState({ items });
+  }
+
   componentDidMount() {
-    this.listener = ItemStore.on('change', () => {
-      const items = ItemStore.getItems();
-      this.setState({ items });
-    });
+    ItemStore.on('change', this.updateItems);
   }
 
   componentWillUnmount() {
-    ItemStore.off('change', this.listener);
+    ItemStore.off('change', this.updateItems);
   }
 
   render() {
@@ -34,8 +35,6 @@ class Application extends Component {
         <Items
           title="Unpacked Items"
           items={unpackedItems}
-          onCheckOff={this.markAsPacked}
-          onRemove={this.removeItem}
         />
         <Items title="Packed Items" items={packedItems} />
       </div>
