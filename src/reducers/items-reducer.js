@@ -2,8 +2,8 @@ import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED } from '..
 
 export default function(state = {}, action) {
   if (action.type === ADD_NEW_ITEM) {
-    const { id, packed, value } = action;
-    return [ ...state, { id, packed, value } ];
+    const { item } = action;
+    return [ ...state, item ];
   }
 
   if (action.type === REMOVE_ITEM) {

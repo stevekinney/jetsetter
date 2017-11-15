@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import * as constants from '../constants';
 
 import {
@@ -29,17 +27,17 @@ describe('Item Actions', () => {
     it('should return the provided value on the action', () => {
       const value = 'item name';
       const action = addNewItem(value);
-      expect(action.value).toBe(value);
+      expect(action.item.value).toBe(value);
     });
 
     it('should default packed on the result action', () => {
       const action = addNewItem('item name');
-      expect(action.packed).toBe(false);
+      expect(action.item.packed).toBe(false);
     });
 
     it('provide a string id', () => {
       const action = addNewItem('item name');
-      expect(typeof action.id).toBe('string');
+      expect(typeof action.item.id).toBe('string');
     });
   });
 
