@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
+import uniqueId from 'lodash/uniqueId';
+
 import './NewItem.css';
 
 class NewItem extends Component {
-  handleChange = (event) => {
-    const value = event.target.value;
-    this.props.updateNewItemValue(value);
+  state = {
+    value: '',
+  };
+
+  shouldComponentUpdate(newProps, newState) {
+    return this.state.value !== newState.value;
   }
 
-  handleSubmit = (event) => {
+  handleChange = event => {
+    const value = event.target.value;
+    this.setState({ value });
+  };
+
+  handleSubmit = event => {
+    const { onSubmit } = this.props;
+    const { value } = this.state;
+
     event.preventDefault();
-    const { value } = this.props;
-    this.props.addNewItem(value);
-  }
+    onSubmit({ value, packed: false, id: uniqueId() });
+    this.setState({ value: '' });
+  };
 
   render() {
-    const { value } = this.props;
+    const { value } = this.state;
 
     return (
       <form className="NewItem" onSubmit={this.handleSubmit}>
