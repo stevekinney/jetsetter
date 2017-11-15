@@ -22,7 +22,7 @@ describe('Combined Reducer', () => {
     expect(reducer(initialState, {})).toBe(initialState);
   });
 
-  describe('addNewItem', () => {
+  xit('addNewItem', () => {
     const value = 'item name';
     const action = addNewItem(value);
     const item = action.item;
@@ -31,7 +31,7 @@ describe('Combined Reducer', () => {
     expect(state.items).toContain(item);
   });
 
-  describe('removeItem', () => {
+  xit('removeItem', () => {
     const [ item ] = initialState.items;
     const action = removeItem(item.id);
     const state = reducer(initialState, action);
@@ -39,7 +39,7 @@ describe('Combined Reducer', () => {
     expect(state.items).not.toContain(item);
   });
 
-  describe('toggleitem', () => {
+  xit('toggleitem', () => {
     const [ item ] = initialState.items;
     const expectedStatus = !item.packed;
     const action = toggleItem(item.id);
@@ -49,7 +49,7 @@ describe('Combined Reducer', () => {
     expect(resultingItem.packed).not.toContain(expectedStatus);
   });
 
-  describe('markAllAsUnpacked', () => {
+  xit('markAllAsUnpacked', () => {
     const action = markAllAsUnpacked();
     const state = reducer(initialState, action);
 
@@ -59,7 +59,7 @@ describe('Combined Reducer', () => {
   });
 
   describe('updateNewItemValue', () => {
-    it('should update the newItemValue field on the resulting state', () => {
+    xit('should update the newItemValue field on the resulting state', () => {
       const value = 'item name';
       const action = updateNewItemValue(value);
       const state = reducer(initialState, action);
@@ -68,7 +68,7 @@ describe('Combined Reducer', () => {
   });
 
   describe('updatePackedItemsFilter', () => {
-    it('should update the newItemValue field on the resulting state', () => {
+    xit('should update the newItemValue field on the resulting state', () => {
       const value = 'item name';
       const action = updatePackedItemsFilter(value);
       const state = reducer(initialState, action);
@@ -77,7 +77,7 @@ describe('Combined Reducer', () => {
   });
 
   describe('updateUnpackedItemsFilter', () => {
-    it('should update the newItemValue field on the resulting state', () => {
+    xit('should update the newItemValue field on the resulting state', () => {
       const value = 'item name';
       const action = updateUnpackedItemsFilter(value);
       const state = reducer(initialState, action);
