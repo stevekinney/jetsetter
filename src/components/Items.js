@@ -12,8 +12,8 @@ class Items extends Component {
           {title} ({items.length})
         </h2>
         {items.map(item => (
-          <WithItemActions render={(actions) => (
-            <Item key={item.id} {...item} {...actions} />
+          <WithItemActions key={item.id} render={(actions) => (
+            <Item item={item} {...actions} />
           )} />
         ))}
       </section>
