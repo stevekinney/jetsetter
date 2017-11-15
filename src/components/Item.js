@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import './Item.css';
 
-import { removeItem, toggleItem } from '../actions';
-
 class Item extends Component {
   toggleItem = () => {
     const { item } = this.props;
-    toggleItem(item);
+    this.props.toggleItem(item);
   };
 
   removeItem = () => {
     const { item } = this.props;
-    removeItem(item);
+    this.props.removeItem(item);
   };
 
   render() {

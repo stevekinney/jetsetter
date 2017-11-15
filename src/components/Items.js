@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WithItemActions from '../containers/WithItemActions';
 import Item from './Item';
 import './Items.css';
 
@@ -10,7 +11,11 @@ class Items extends Component {
         <h2>
           {title} ({items.length})
         </h2>
-        {items.map(item => <Item key={item.id} item={item} />)}
+        {items.map(item => (
+          <WithItemActions render={(actions) => (
+            <Item key={item.id} {...item} {...actions} />
+          )} />
+        ))}
       </section>
     );
   }
