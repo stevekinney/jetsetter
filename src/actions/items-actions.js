@@ -8,6 +8,15 @@ import {
 
 import Api from '../lib/api';
 
+export const fetchItems = () => ({
+  type: 'FETCH_ITEMS'
+});
+
+export const updateAllItems = (items) => ({
+  type: UPDATE_ALL_ITEMS,
+  items,
+});
+
 export const getAllItems = () => {
   return dispatch => {
     Api.getAll().then(items => {
