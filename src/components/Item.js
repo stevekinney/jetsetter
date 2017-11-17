@@ -10,12 +10,12 @@ class Item extends Component {
           <input
             type="checkbox"
             checked={item.packed}
-            onChange={onCheckOff}
+            onChange={item.toggle}
             id={item.id}
           />
           {item.value}
         </label>
-        <button className="Item-remove" onClick={onRemove}>
+        <button className="Item-remove" onClick={item.remove}>
           Remove
         </button>
       </article>

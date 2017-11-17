@@ -18,6 +18,10 @@ export default class Item {
     return !this.packed;
   }
 
+  @action.bound toggle() {
+    return this.packed = !this.packed;
+  }
+
   @action.bound remove() {
     this.list.removeItem(this);
   }

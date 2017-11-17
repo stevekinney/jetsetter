@@ -19,16 +19,11 @@ class Items extends Component {
         <h2>
           {title} ({items.length})
         </h2>
-        <Filter searchTerm={searchTerm} onChange={this.updateSearchTerm} />
+        { this.props.children }
         {items
-          .filter(item =>
-            item.value.toLowerCase().includes(searchTerm.toLowerCase()),
-          )
           .map(item => (
             <Item
               key={item.id}
-              onCheckOff={() => onCheckOff(item)}
-              onRemove={() => onRemove(item)}
               item={item}
             />
           ))}
