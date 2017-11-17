@@ -2,7 +2,7 @@ import localforage from 'localforage';
 
 window.localforage = localforage;
 
-const getAll = async () => {
+const getAll = window.getAll = async () => {
   const items = await localforage.getItem('items');
   if (!items) await localforage.setItem('items', []);
   return items || [];
