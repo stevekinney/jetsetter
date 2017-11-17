@@ -1,16 +1,16 @@
 import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED, UPDATE_ALL_ITEMS } from '../constants';
 import Api from '../lib/api';
 
-export const getAllItems = () => {
-  return dispatch => {
-    Api.getAll().then(items => {
-      dispatch({
-        type: UPDATE_ALL_ITEMS,
-        items
-      });
-    });
+export const fetchItems = () => {
+  return {
+    type: 'FETCH_ITEMS'
   }
-}
+};
+
+export const updateAllItems = (items) => ({
+  type: UPDATE_ALL_ITEMS,
+  items
+});
 
 export const addNewItem = (value) => {
   const item = {
