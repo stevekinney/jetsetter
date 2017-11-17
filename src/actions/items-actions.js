@@ -3,15 +3,21 @@ import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED } from '..
 
 export const addNewItem = (value) => ({
   type: ADD_NEW_ITEM,
-  item: {
-    id: uniqueId(),
-    packed: false,
-    value,
-  }
+  id: uniqueId(),
+  packed: false,
+  value,
 });
 
-export const toggleItem = () => ({});
+export const toggleItem = (id) => ({
+  type: TOGGLE_ITEM,
+  id,
+});
 
-export const removeItem = () => ({});
+export const removeItem = (id) => ({
+  type: REMOVE_ITEM,
+  id,
+});
 
-export const markAllAsUnpacked = () => ({});
+export const markAllAsUnpacked = () => ({
+  type: MARK_ALL_AS_UNPACKED,
+})

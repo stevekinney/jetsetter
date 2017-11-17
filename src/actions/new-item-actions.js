@@ -1,3 +1,11 @@
+import uniqueId from 'lodash/uniqueId';
 import { UPDATE_NEW_ITEM_VALUE } from '../constants';
 
-export const updateNewItemValue = () => ({});
+export const updateNewItemValue = (value) => ({
+  type: UPDATE_NEW_ITEM_VALUE,
+  item: {
+    value,
+    id: uniqueId(),
+    packed: false
+  }
+});
