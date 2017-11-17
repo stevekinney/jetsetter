@@ -3,9 +3,11 @@ import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED } from '..
 
 export const addNewItem = (value) => ({
   type: ADD_NEW_ITEM,
-  id: uniqueId(),
-  packed: false,
-  value,
+  item: {
+    id: uniqueId(),
+    packed: false,
+    value,
+  }
 });
 
 export const toggleItem = (id) => ({
