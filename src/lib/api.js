@@ -20,9 +20,9 @@ export default {
     return await getAll();
   },
 
-  async delete({ id }) {
+  async delete(id) {
     const items = await getAll();
-    localforage.setItem('items', items.filter(item => item.id !== id));
+    return await localforage.setItem('items', items.filter(item => item.id !== id));
   },
 
   async update(updatedItem) {

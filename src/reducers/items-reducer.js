@@ -1,9 +1,13 @@
-import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED } from '../constants';
+import { ADD_NEW_ITEM, REMOVE_ITEM, TOGGLE_ITEM, MARK_ALL_AS_UNPACKED, UPDATE_ALL_ITEMS } from '../constants';
 
 export default function(state = {}, action) {
+  if (action.type === UPDATE_ALL_ITEMS) {
+    return action.items;
+  }
+
   if (action.type === ADD_NEW_ITEM) {
-    const { id, packed, value } = action;
-    return [ ...state, { id, packed, value } ];
+    const item = action.item;
+    return [ ...state, item ];
   }
 
   if (action.type === REMOVE_ITEM) {
@@ -12,7 +16,7 @@ export default function(state = {}, action) {
 
   if (action.type === TOGGLE_ITEM) {
     return state.map(item => {
-      if (item.id === action.id) return { ...item, packed: !item.packed  };
+      if (item.id === action.item.id) return { ...action.item  };
       return item;
     });
   }
