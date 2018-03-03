@@ -25,7 +25,7 @@ class Application extends Component {
     // Set the initial state,
   };
 
-  // How are we going to manipualte the state?
+  // How are we going to manipulate the state?
   // Ideally, users are going to want to add, remove,
   // and check off items, right?
 
