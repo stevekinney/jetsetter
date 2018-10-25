@@ -3,7 +3,7 @@ import './Item.css';
 
 class Item extends Component {
   render() {
-    const { item, onCheckOff, onRemove } = this.props;
+    const { item } = this.props;
     return (
       <article className="Item">
         <label htmlFor={item.id}>

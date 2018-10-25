@@ -4,8 +4,10 @@ import { observable, action, computed } from 'mobx';
 export default class Item {
   id;
   store;
-  @observable value;
-  @observable packed;
+  @observable
+  value;
+  @observable
+  packed;
 
   constructor({ value, id = uniqueId(), packed = false }, list) {
     this.id = id;
@@ -14,15 +16,18 @@ export default class Item {
     this.list = list;
   }
 
-  @computed get unpacked() {
+  @computed
+  get unpacked() {
     return !this.packed;
   }
 
-  @action.bound toggle() {
-    return this.packed = !this.packed;
+  @action.bound
+  toggle() {
+    return (this.packed = !this.packed);
   }
 
-  @action.bound remove() {
+  @action.bound
+  remove() {
     this.list.removeItem(this);
   }
 }

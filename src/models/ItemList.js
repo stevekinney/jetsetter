@@ -2,9 +2,12 @@ import { observable, computed, action } from 'mobx';
 import Item from './item';
 
 export default class ItemList {
-  @observable items = [];
-  @observable unpackedItemsFilter = '';
-  @observable packedItemsFilter = '';
+  @observable
+  items = [];
+  @observable
+  unpackedItemsFilter = '';
+  @observable
+  packedItemsFilter = '';
 
   @computed
   get packedItems() {
@@ -19,14 +22,14 @@ export default class ItemList {
   @computed
   get filteredUnpackedList() {
     return this.unpackedItems.filter(item =>
-      item.value.includes(this.unpackedItemsFilter),
+      item.value.includes(this.unpackedItemsFilter)
     );
   }
 
   @computed
-  get filteredpackedList() {
+  get filteredPackedList() {
     return this.packedItems.filter(item =>
-      item.value.includes(this.packedItemsFilter),
+      item.value.includes(this.packedItemsFilter)
     );
   }
 
@@ -40,11 +43,13 @@ export default class ItemList {
     this.items = this.items.filter(i => i !== item);
   }
 
-  @action.bound updatePackedItemsFilter(value) {
+  @action.bound
+  updatePackedItemsFilter(value) {
     this.packedItemsFilter = value;
   }
 
-  @action.bound updateUnpackedItemsFilter(value) {
+  @action.bound
+  updateUnpackedItemsFilter(value) {
     this.unpackedItemsFilter = value;
   }
 }
