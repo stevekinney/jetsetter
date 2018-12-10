@@ -1,3 +1,9 @@
+## Course
+
+This project was built to teach the [Advanced State Management in React (feat. Redux and MobX) Course](https://frontendmasters.com/courses/react-state/) for Frontend Masters.
+
+## Code
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
