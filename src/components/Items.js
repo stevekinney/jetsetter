@@ -4,7 +4,7 @@ import Filter from './Filter';
 
 class Items extends Component {
   state = {
-    searchTerm: '',
+    searchTerm: ''
   };
 
   updateSearchTerm = searchTerm => {
@@ -12,21 +12,16 @@ class Items extends Component {
   };
 
   render() {
-    const { title, items, onCheckOff, onRemove } = this.props;
-    const { searchTerm } = this.state;
+    const { title, items } = this.props;
     return (
       <section className="Items">
         <h2>
           {title} ({items.length})
         </h2>
-        { this.props.children }
-        {items
-          .map(item => (
-            <Item
-              key={item.id}
-              item={item}
-            />
-          ))}
+        {this.props.children}
+        {items.map(item => (
+          <Item key={item.id} item={item} />
+        ))}
       </section>
     );
   }
